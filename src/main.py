@@ -6,7 +6,8 @@ from norm_vib import (
     pos_vec, 
     animate, 
     correct_com,
-    is_approximately_unitary
+    is_approximately_unitary,
+    do_plot
 )
 import numpy as np
 """
@@ -26,8 +27,8 @@ Idea of the project:
 def main():
     MOLECULE = "testo"
     NOSPEED = True
-    NUM_VIB = 50  #29
-    HEAVY_WIGGLE = 10
+    NUM_VIB = 4  #29
+    HEAVY_WIGGLE = 4
     hessfile = f"{MOLECULE}.hess"
     xyzfile = f"{MOLECULE}.xyz"
     posvec = pos_vec(read_xyz(xyzfile))
@@ -35,6 +36,7 @@ def main():
     posvec = correct_com(posvec, mass)
     frames = make_frames(eigenval, eigenvec, NUM_VIB, posvec, NOSPEED, HEAVY_WIGGLE)
     animate(frames, mass)
+    do_plot(frames, mass)
 
 if __name__ == "__main__":
     main()
